@@ -13,8 +13,10 @@ class MoviesController < ApplicationController
   
   def update
     @movie = Movie.find(params[:id])
-    @movie.update(movie_params)
+    if @movie.update(movie_params)
     redirect_to @movie
+  else
+    render :edit
   end
 
   def new
@@ -23,8 +25,10 @@ class MoviesController < ApplicationController
   
   def create
     @movie = Movie.new(movie_params)
-    @movie.save
+    if @movie.save
     redirect_to @movie
+  else
+    render :new
   end
   
   def destroy
